@@ -37,7 +37,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Copy Data1",
+							"name": "AT_CopyData",
 							"type": "Copy",
 							"policy": {
 								"timeout": "7.00:00:00",
@@ -48,12 +48,37 @@
 							},
 							"typeProperties": {
 								"source": {
-									"type": "BlobSource",
-									"recursive": true
+									"type": "SqlSource",
+									"sqlReaderStoredProcedureName": "[dbo].[GetsalesData]",
+									"storedProcedureParameters": {
+										"enddate": {
+											"type": "DateTime",
+											"value": {
+												"value": "@{activity('AT_LKP_GetDateRange').output.firstRow.enddate}",
+												"type": "Expression"
+											}
+										},
+										"startdate": {
+											"type": "DateTime",
+											"value": {
+												"value": "@{activity('AT_LKP_GetDateRange').output.firstRow.startdate}",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								"sink": {
+									"type": "BlobSink"
 								},
 								"enableStaging": false
 							},
 							"inputs": [
+								{
+									"referenceName": "DS_SalesData",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
 								{
 									"referenceName": "DS_BlobStorage",
 									"type": "DatasetReference"
