@@ -6,6 +6,20 @@
 			"type": "LinkedServiceReference"
 		},
 		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "id",
+				"type": "Int32"
+			},
+			{
+				"name": "startdate",
+				"type": "Date"
+			},
+			{
+				"name": "enddate",
+				"type": "Date"
+			}
+		],
 		"typeProperties": {
 			"tableName": "[dbo].[daterange]"
 		}
