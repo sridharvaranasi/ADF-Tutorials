@@ -1,0 +1,70 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "SampleDemo-ADF"
+		},
+		"LS_SQL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQL'"
+		},
+		"LS_BlobStorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BlobStorage'"
+		},
+		"DS_BlobStorage_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@concat('sales',item().startdate,'.csv')"
+		},
+		"DS_BlobStorage_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "data"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_SQL_connectionString": {
+						"value": "[parameters('LS_SQL_connectionString')]"
+					},
+					"LS_BlobStorage_connectionString": {
+						"value": "[parameters('LS_BlobStorage_connectionString')]"
+					},
+					"DS_BlobStorage_properties_typeProperties_fileName": {
+						"value": "[parameters('DS_BlobStorage_properties_typeProperties_fileName')]"
+					},
+					"DS_BlobStorage_properties_typeProperties_folderPath": {
+						"value": "[parameters('DS_BlobStorage_properties_typeProperties_folderPath')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
