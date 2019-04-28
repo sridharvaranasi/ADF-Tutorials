@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_CopySales_Iteratively",
 	"properties": {
 		"activities": [
 			{
@@ -19,7 +19,8 @@
 					"dataset": {
 						"referenceName": "DS_Daterange",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
