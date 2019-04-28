@@ -17,7 +17,7 @@
 				"firstRowAsHeader": false
 			},
 			"fileName": {
-				"value": "concat('sales',@item().strartdate,'.csv')",
+				"value": "@concat('sales',item().strartdate,'.csv')",
 				"type": "Expression"
 			},
 			"folderPath": "data"
