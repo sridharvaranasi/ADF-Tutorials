@@ -1,0 +1,26 @@
+{
+	"name": "DS_BlobStorage",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": false
+			},
+			"fileName": {
+				"value": "concat('sales',@{activity('AT_LKP_GetDateRange').output.firstRow.startdate},'.csv')",
+				"type": "Expression"
+			},
+			"folderPath": "data"
+		}
+	}
+}
