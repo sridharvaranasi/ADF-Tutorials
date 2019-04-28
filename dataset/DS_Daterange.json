@@ -1,0 +1,13 @@
+{
+	"name": "DS_Daterange",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"typeProperties": {
+			"tableName": "[dbo].[daterange]"
+		}
+	}
+}
