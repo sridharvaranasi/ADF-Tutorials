@@ -23,7 +23,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "AT_ForEach",
 				"type": "ForEach",
 				"dependsOn": [
 					{
